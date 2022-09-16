@@ -249,7 +249,7 @@ fi
 
 if [[ -z "$tmpDIST" ]]; then
   [ "$Relese" == 'Debian' ] && tmpDIST='jessie' && DIST='jessie';
-  [ "$Relese" == 'Ubuntu' ] && tmpDIST='bionic' && DIST='bionic';
+  [ "$Relese" == 'Ubuntu' ] && tmpDIST='jammy' && DIST='jammy';
   [ "$Relese" == 'CentOS' ] && tmpDIST='6.10' && DIST='6.10';
 fi
 
