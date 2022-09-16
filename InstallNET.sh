@@ -196,6 +196,7 @@ function selectMirror(){
       Current="${MirrorBackup[$mirror]}"
       [ -n "$Current" ] || continue
       MirrorURL=`echo "$TEMP" |sed "s#SUB_MIRROR#${Current}#g"`
+      echo -ne "\n MirrorURL is $MirrorURL \n\n";
       wget --no-check-certificate --spider --timeout=3 -o /dev/null "$MirrorURL"
       [ $? -eq 0 ] && mirrorStatus=1 && break
     done
