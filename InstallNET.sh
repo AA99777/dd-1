@@ -196,7 +196,6 @@ function selectMirror(){
       Current="${MirrorBackup[$mirror]}"
       [ -n "$Current" ] || continue
       MirrorURL=`echo "$TEMP" |sed "s#SUB_MIRROR#${Current}#g"`
-      echo -ne "\n MirrorURL is $MirrorURL \n\n";
       wget --no-check-certificate --spider --timeout=3 -o /dev/null "$MirrorURL"
       [ $? -eq 0 ] && mirrorStatus=1 && break
     done
@@ -356,10 +355,9 @@ if [[ -n "$tmpDIST" ]]; then
         [[ "$isDigital" == '16.04' ]] && DIST='xenial';
         [[ "$isDigital" == '18.04' ]] && DIST='bionic';
         [[ "$isDigital" == '20.04' ]] && DIST='focal';
-        [[ "$isDigital" == '22.04' ]] && DIST='jammy';
       }
     }
-    echo "selectMirror!!!!! "$Relese" "$DIST" "$VER" "$tmpMirror""
+    echo -ne "selectMirror !!!!!!!! "$Relese" "$DIST" "$VER" "$tmpMirror""
     LinuxMirror=$(selectMirror "$Relese" "$DIST" "$VER" "$tmpMirror")
   fi
   if [[ "$Relese" == 'CentOS' ]]; then
@@ -769,4 +767,3 @@ else
   [[ -f "/boot/vmlinuz" ]] && rm -rf "/boot/vmlinuz"
   echo && ls -AR1 "$HOME/loader"
 fi
-
