@@ -359,6 +359,7 @@ if [[ -n "$tmpDIST" ]]; then
         [[ "$isDigital" == '22.04' ]] && DIST='jammy';
       }
     }
+    echo "selectMirror!!!!! "$Relese" "$DIST" "$VER" "$tmpMirror""
     LinuxMirror=$(selectMirror "$Relese" "$DIST" "$VER" "$tmpMirror")
   fi
   if [[ "$Relese" == 'CentOS' ]]; then
