@@ -358,8 +358,9 @@ if [[ -n "$tmpDIST" ]]; then
         [[ "$isDigital" == '20.04' ]] && DIST='focal';
       }
     }
-    echo -ne "selectMirror !!!!!!!! "$Relese" "$DIST" "$VER" "$tmpMirror""
+    
     LinuxMirror=$(selectMirror "$Relese" "$DIST" "$VER" "$tmpMirror")
+    echo -ne "selectMirror !!!!!!!! "$LinuxMirror" !!/n"
   fi
   if [[ "$Relese" == 'CentOS' ]]; then
     SpikCheckDIST='1'
