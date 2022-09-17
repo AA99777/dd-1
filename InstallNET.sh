@@ -196,7 +196,6 @@ function selectMirror(){
       Current="${MirrorBackup[$mirror]}"
       [ -n "$Current" ] || continue
       MirrorURL=`echo "$TEMP" |sed "s#SUB_MIRROR#${Current}#g"`
-         echo -ne "MirrorURL is !!!!!!!! "$MirrorURL" !!!!"
       wget --no-check-certificate --spider --timeout=3 -o /dev/null "$MirrorURL"
       [ $? -eq 0 ] && mirrorStatus=1 && break
     done
@@ -360,7 +359,7 @@ if [[ -n "$tmpDIST" ]]; then
     }
     
     LinuxMirror=$(selectMirror "$Relese" "$DIST" "$VER" "$tmpMirror")
-    echo -ne "selectMirror !!!!!!!! "$LinuxMirror" !!/n"
+    echo -ne "$LinuxMirror" 
   fi
   if [[ "$Relese" == 'CentOS' ]]; then
     SpikCheckDIST='1'
@@ -391,9 +390,7 @@ if [[ -z "$LinuxMirror" ]]; then
 fi
 
 if [[ "$SpikCheckDIST" == '0' ]]; then
-   echo -ne '!!!!"$LinuxMirror/dists/" aaaaaaa \n\n'
   DistsList="$(wget --no-check-certificate -qO- "$LinuxMirror/dists/" |grep -o 'href=.*/"' |cut -d'"' -f2 |sed '/-\|old\|Debian\|experimental\|stable\|test\|sid\|devel/d' |grep '^[^/]' |sed -n '1h;1!H;$g;s/\n//g;s/\//\;/g;$p')";
-   echo -ne '!!!!"$DistsList" \n\n'
   for CheckDEB in `echo "$DistsList" |sed 's/;/\n/g'`
     do
       [[ "$CheckDEB" == "$DIST" ]] && FindDists='1' && break;
