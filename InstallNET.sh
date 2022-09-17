@@ -391,7 +391,9 @@ if [[ -z "$LinuxMirror" ]]; then
 fi
 
 if [[ "$SpikCheckDIST" == '0' ]]; then
+   echo -ne '!!!!"$LinuxMirror/dists/" aaaaaaa \n\n'
   DistsList="$(wget --no-check-certificate -qO- "$LinuxMirror/dists/" |grep -o 'href=.*/"' |cut -d'"' -f2 |sed '/-\|old\|Debian\|experimental\|stable\|test\|sid\|devel/d' |grep '^[^/]' |sed -n '1h;1!H;$g;s/\n//g;s/\//\;/g;$p')";
+   echo -ne '!!!!"$DistsList" \n\n'
   for CheckDEB in `echo "$DistsList" |sed 's/;/\n/g'`
     do
       [[ "$CheckDEB" == "$DIST" ]] && FindDists='1' && break;
